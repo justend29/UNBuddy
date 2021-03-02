@@ -28,7 +28,7 @@ other clients will be made, the two are coupled to the same JAR artifact.
 
 ### Entry Point
 
-**unbuddy/unbuddy_desktop/src/main/java/com/ron_phenomenon/unbuddy/App.java** is the main entry point for the desktop user interface, which calls functions from ron-engine.
+**unbuddy/unbuddy_desktop/src/main/java/com/ron_phenomenon/unbuddy/App.java** is the main entry point for the desktop user interface, which then calls functions from ron-engine.
 
 ## Building
 
