@@ -11,16 +11,27 @@ import javax.crypto.spec.PBEKeySpec;
 public abstract class User {
   public final String email;
   public final byte[] hashedPassword;
+  private static User loggedInUser;
 
   public User(final String email, final String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
     this.email = email;
     this.hashedPassword = hashPassword(password);
+    User.loggedInUser = null;
   }
 
   public static void createAccount(final String email, final String password) {
   }
 
   public static void login(final String email, final String password) {
+    User.loggedInUser = null; // TODO: actually log in
+  }
+
+  public static void logout() {
+    User.loggedInUser = null;
+  }
+
+  public static User getLoggedInUser() {
+    return User.loggedInUser;
   }
 
   public static byte[] hashPassword(final String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
