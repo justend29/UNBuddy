@@ -16,15 +16,16 @@ https://maven.apache.org/guides/introduction/introduction-to-the-standard-direct
 
 ### Components
 
-There are two main components of UNBuddy:
+There are three main components of UNBuddy:
 
 1. the desktop user interface
 2. *ron-engine*, the backend engine which reconciles course dependencies
+3. *data-model*, the
 
-In a perfect world, these would be independent artifacts, such that various
-other clients (web-apps, mobile-apps, CLI, etc.) could be made and link to
-*ron-engine* as a dependency. However, as this is only a prototype and no
-other clients will be made, the two are coupled to the same JAR artifact.
+In a perfect world, these would be independent artifacts that link to each
+other, such that various other clients (web-apps, mobile-apps, CLI, etc.)
+could be easily made. However, as this is only a prototype and no other
+clients will be made, they are coupled to the same JAR artifact.
 
 ### Entry Point
 
@@ -48,3 +49,5 @@ cd unbuddy_desktop
 mvn package
 java -jar target/unbuddy_desktop-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
+
+Any Java IDE should support Maven, too, so that can be set up.
