@@ -31,6 +31,13 @@ clients will be made, they are coupled to the same JAR artifact.
 
 **unbuddy/unbuddy_desktop/src/main/java/com/ron_phenomenon/unbuddy/App.java** is the main entry point for the desktop user interface, which then calls functions from ron-engine.
 
+### Formatting
+
+The file *eclipse-java-google-style.xml* specifies the auto-formatting style
+for IDEs or autoformatters to use. Information about using the format file in
+vs-code or eclipse can be founde
+[here](https://github.com/redhat-developer/vscode-java/wiki/Formatter-settings)
+
 ## Building
 
 The Apache Maven *Assembly* plugin is used to create a fat JAR containing the

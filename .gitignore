@@ -1,4 +1,6 @@
+.vscode
 target/
 unbuddy_desktop/.classpath
 unbuddy_desktop/.project
 unbuddy_desktop/.settings/
+unbuddy_desktop/.factorypath
