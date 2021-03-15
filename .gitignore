@@ -1,4 +1,5 @@
-.vscode
+.vscode/
+.idea/
 target/
 unbuddy_desktop/.classpath
 unbuddy_desktop/.project

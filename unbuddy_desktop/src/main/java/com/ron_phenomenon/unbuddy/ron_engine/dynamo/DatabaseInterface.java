@@ -18,25 +18,30 @@ import com.ron_phenomenon.unbuddy.model.users.User;
 import com.ron_phenomenon.unbuddy.model.users.UserType;
 import com.ron_phenomenon.unbuddy.model.users.Student;
 import com.ron_phenomenon.unbuddy.model.users.Faculty;
+import com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings.AcademicProgramItem;
+import com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings.CourseItem;
+import com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings.RequirementItem;
 import com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings.UserItem;
 
 
 public class DatabaseInterface {
   private static DynamoDbEnhancedClient client;
 
-  private static final String accessKey = "AKIAR3FNVHQCEGEMPCML";
-  private static final String secretAccessKey = "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";
+  private static final String accessKey = "AKIAR3FNVHQCJOWKMYKM";
+  private static final String secretAccessKey = "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";
 
   private static HashMap<String, User> cachedUsers = new HashMap<>();
   private static final int numCachedUsers = 5;
 
   public static void connect() {
-    AwsBasicCredentials awsCreds = AwsBasicCredentials.create(accessKey, secretAccessKey);
+    if (client == null) {
+      AwsBasicCredentials awsCreds = AwsBasicCredentials.create(accessKey, secretAccessKey);
 
-    DynamoDbClient normalClient = DynamoDbClient.builder().region(Region.CA_CENTRAL_1)
-        .credentialsProvider(StaticCredentialsProvider.create(awsCreds)).build();
+      DynamoDbClient normalClient = DynamoDbClient.builder().region(Region.CA_CENTRAL_1)
+          .credentialsProvider(StaticCredentialsProvider.create(awsCreds)).build();
 
-    client = DynamoDbEnhancedClient.builder().dynamoDbClient(normalClient).build();
+      client = DynamoDbEnhancedClient.builder().dynamoDbClient(normalClient).build();
+    }
   }
 
   public static User getUser(final String email)
@@ -89,7 +94,7 @@ public class DatabaseInterface {
       } else {
         item.setUserType(1);
       }
-      usersTable.putItem(item);;
+      usersTable.putItem(item);
 
       if (cachedUsers.size() > 0) {
         cachedUsers.remove(cachedUsers.keySet().toArray()[0]);
@@ -100,5 +105,40 @@ public class DatabaseInterface {
     }
   }
 
+  public static void writeCourseItem(final CourseItem course) {
+    try {
+      DynamoDbTable<CourseItem> courseTable =
+          client.table("Courses", TableSchema.fromBean(CourseItem.class));
+
+      courseTable.putItem(course);
+
+    } catch (DynamoDbException e) {
+      System.err.println("failed writing course item" + e.getMessage());
+    }
+  }
+
+  public static void writeRequirementItem(final RequirementItem req) {
+    try {
+      DynamoDbTable<RequirementItem> reqTable =
+          client.table("Requirements", TableSchema.fromBean(RequirementItem.class));
+
+      reqTable.putItem(req);
+
+    } catch (DynamoDbException e) {
+      System.err.println("failed writing requirement item" + e.getMessage());
+    }
+  }
+
+  public static void writeAcademicProgramItem(final AcademicProgramItem program) {
+    try {
+      DynamoDbTable<AcademicProgramItem> programTable =
+          client.table("AcademicPrograms", TableSchema.fromBean(AcademicProgramItem.class));
+
+      programTable.putItem(program);
+
+    } catch (DynamoDbException e) {
+      System.err.println("failed writing program item" + e.getMessage());
+    }
+  }
 
 }

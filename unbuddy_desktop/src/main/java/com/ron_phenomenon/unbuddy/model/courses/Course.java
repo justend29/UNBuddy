@@ -7,7 +7,8 @@ import com.ron_phenomenon.unbuddy.model.requirements.Requirement;
 public class Course {
   private final String name;
   private final int creditHours;
-  public ArrayList<Requirement> dependencies;
+  public ArrayList<Requirement> requirements;
+  public ArrayList<CourseOffering> offerings;
 
   public Course(final String name, final int creditHours) {
     this.name = name;

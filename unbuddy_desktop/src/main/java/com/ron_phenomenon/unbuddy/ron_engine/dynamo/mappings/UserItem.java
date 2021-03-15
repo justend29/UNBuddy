@@ -1,5 +1,7 @@
 package com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings;
 
+import java.util.HashSet;
+
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
@@ -10,6 +12,9 @@ public class UserItem {
   private byte[] salt;
   private int userType;
   private String enrolmentsDocument;
+  private HashSet<String> completed; // "courseName,term,year" -> defines a course offering
+  private HashSet<String> currentlyEnrolled; // "courseName,term,year"
+  private HashSet<String> programs; // "degree,year"
 
 
   @DynamoDbPartitionKey
@@ -53,4 +58,27 @@ public class UserItem {
     this.salt = salt;
   }
 
+  public HashSet<String> getCompleted() {
+    return this.completed;
+  }
+
+  public void setCompleted(final HashSet<String> completed) {
+    this.completed = completed;
+  }
+
+  public HashSet<String> getCurrentlyEnrolled() {
+    return this.currentlyEnrolled;
+  }
+
+  public void setCurrentlyEnrolled(final HashSet<String> currentlyEnrolled) {
+    this.currentlyEnrolled = currentlyEnrolled;
+  }
+
+  public HashSet<String> getPrograms() {
+    return this.programs;
+  }
+
+  public void setPrograms(final HashSet<String> programs) {
+    this.programs = programs;
+  }
 }
