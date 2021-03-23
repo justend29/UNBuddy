@@ -2,10 +2,7 @@ package com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
 
-import com.ron_phenomenon.unbuddy.model.requirements.RequirementType;
-import com.ron_phenomenon.unbuddy.model.requirements.RequisiteType;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;

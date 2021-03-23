@@ -15,7 +15,7 @@ public class Faculty extends User {
 
   public Faculty(final UserItem dynamoItem) {
     super(dynamoItem.getEmail(), dynamoItem.getHashedPassword(), dynamoItem.getSalt());
-    facultyName = null;
+    facultyName = dynamoItem.getFacultyName();
   }
 
   public Faculty(final String email, final String password)

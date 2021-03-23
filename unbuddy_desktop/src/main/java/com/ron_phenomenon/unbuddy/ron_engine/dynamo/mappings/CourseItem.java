@@ -7,12 +7,12 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 
 @DynamoDbBean
 public class CourseItem {
+  private String name;
+  private Integer creditHours;
+  private String description;
   private Set<Integer> dependencies; // ids of RequirementItem
   // set of offerings, where each offering extends multiple year/semesters
   private Set<String> offerings; // "term(number) * 10000 + year(4 digits),..."
-  private String name;
-  private String description;
-  private Integer creditHours;
 
   @DynamoDbPartitionKey
   public String getName() {
