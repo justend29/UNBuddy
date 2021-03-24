@@ -1,6 +1,5 @@
-package LoginPage;
+package com.ron_phenomenon.unbuddy.desktop_ui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

@@ -1,17 +1,14 @@
-package LoginPage;
+package com.ron_phenomenon.unbuddy.desktop_ui;
 
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.*;
 import javax.swing.JButton;
-import javax.swing.Box;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.lang.*;
