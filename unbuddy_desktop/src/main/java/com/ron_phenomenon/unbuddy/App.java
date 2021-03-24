@@ -1,15 +1,20 @@
 package com.ron_phenomenon.unbuddy;
 
 import com.ron_phenomenon.unbuddy.model.AcademicProgram;
+import com.ron_phenomenon.unbuddy.model.Term;
 import com.ron_phenomenon.unbuddy.model.courses.Course;
+import com.ron_phenomenon.unbuddy.model.courses.CourseOffering;
 import com.ron_phenomenon.unbuddy.model.users.EnrolmentException;
 import com.ron_phenomenon.unbuddy.model.users.Student;
 import com.ron_phenomenon.unbuddy.model.users.User;
 import com.ron_phenomenon.unbuddy.model.users.UserType;
 import com.ron_phenomenon.unbuddy.ron_engine.dynamo.DatabaseInterface;
 import com.ron_phenomenon.unbuddy.ron_engine.dynamo.data_loader.DataLoader;
+import com.ron_phenomenon.util.Pair;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
+import java.time.Instant;
+import java.time.Year;
 import java.util.ArrayList;
 
 public class App {
@@ -61,20 +66,25 @@ public class App {
         }
 
         // Get all courses
+        long start = Instant.now().toEpochMilli();
         ArrayList<Course> allCourses = null;
         try {
             allCourses = DatabaseInterface.getCourses();
         } catch (DynamoDbException e) {
             System.err.println(e.getMessage());
         }
-
-        if(allCourses != null) {
-            System.out.println(allCourses.get(0).creditHours);
-        }
-        System.out.println("Hello World!");
+        long diff = Instant.now().toEpochMilli() - start;
+        System.out.println("Retreiving all took: " + diff);
 
         // Get course offering in term
+        start = Instant.now().toEpochMilli();
+        Pair<Term, Year> offeringTime = new Pair<>(Term.Fall, Year.of(2021));
+        ArrayList<CourseOffering> offerings = DatabaseInterface.getCourseOfferingsInTerm(offeringTime);
+        diff = Instant.now().toEpochMilli() - start;
+        System.out.println("Retreiving offerings took: " + diff);
+        System.out.println("Num offerings: " + offerings.size());
 
-
+        System.out.println("Hello World!");
     }
+
 }

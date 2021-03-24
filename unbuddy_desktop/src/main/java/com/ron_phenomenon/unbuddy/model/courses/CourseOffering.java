@@ -24,8 +24,8 @@ public class CourseOffering {
                 offering.times = Arrays.stream(offerings.split(","))
                         .map(offTime -> {
                           int offTimeInt = Integer.parseInt(offTime);
-                          int termInt = offTimeInt / 1000;
-                          Year year = Year.of(offTimeInt - termInt * 1000);
+                          int termInt = offTimeInt / 10000;
+                          Year year = Year.of(offTimeInt - termInt * 10000);
 
                           Pair<Term, Year> time = new Pair<>();
                           if(termInt == Term.Fall.getValue()) {
@@ -48,7 +48,7 @@ public class CourseOffering {
   public String toString() {
     StringBuilder result = new StringBuilder();
     for(int i =0; i<times.size(); ++i) {
-      int time = 1000 * times.get(i).first.getValue() + times.get(i).second.getValue();
+      int time = 10000 * times.get(i).first.getValue() + times.get(i).second.getValue();
       result.append(courseName).append("#").append(time);
       if(i < times.size() - 1) {
           result.append(",");
