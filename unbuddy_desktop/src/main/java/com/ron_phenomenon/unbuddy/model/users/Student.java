@@ -2,10 +2,14 @@ package com.ron_phenomenon.unbuddy.model.users;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import com.ron_phenomenon.unbuddy.model.Term;
 import com.ron_phenomenon.unbuddy.model.courses.Course;
 import com.ron_phenomenon.unbuddy.model.courses.CourseOffering;
 import com.ron_phenomenon.unbuddy.model.AcademicProgram;
@@ -13,6 +17,7 @@ import com.ron_phenomenon.unbuddy.model.requirements.AdditionalRequirement;
 import com.ron_phenomenon.unbuddy.model.requirements.Requirement;
 import com.ron_phenomenon.unbuddy.ron_engine.dynamo.DatabaseInterface;
 import com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings.UserItem;
+import com.ron_phenomenon.util.Pair;
 
 public class Student extends User {
     public ArrayList<CourseOffering> completed;
@@ -157,8 +162,34 @@ public class Student extends User {
         return false;
     }
 
+    // maps time (term + year) to course name and if it's completed; true = completed
+    HashMap<Pair<Term, Year>, HashSet<Pair<String, Boolean>>> getCoursesPerTerm() {
+        HashMap<Pair<Term, Year>, HashSet<Pair<String, Boolean>>> result = new HashMap<>();
 
+        // add completed courses to result
+        for(final CourseOffering offering : completed) {
+            for(final Pair<Term, Year> time : offering.times) {
+                if(!result.containsKey(time)) {
+                    result.put(time, new HashSet<>());
+                }
+                Pair<String, Boolean> course = new Pair<>(offering.courseName, true);
+                result.get(time).add(course);
+            }
+        }
 
+        // add currently enrolled courses to result
+        for(final CourseOffering offering : currentlyEnrolled) {
+            for(final Pair<Term, Year> time : offering.times) {
+                if(!result.containsKey(time)) {
+                    result.put(time, new HashSet<>());
+                }
+                Pair<String, Boolean> course = new Pair<>(offering.courseName, false);
+                result.get(time).add(course);
+            }
+        }
+
+        return result;
+    }
 
     public boolean complete(final CourseOffering offering) {
         return false;

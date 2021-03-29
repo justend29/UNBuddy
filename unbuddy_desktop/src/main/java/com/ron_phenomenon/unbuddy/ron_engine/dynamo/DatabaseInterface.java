@@ -23,7 +23,9 @@ import java.security.spec.InvalidKeySpecException;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings.AcademicProgramItem;
@@ -148,6 +150,18 @@ public class DatabaseInterface {
               .peek(course -> cachedCourses.put(course.name, course))
               .collect(Collectors.toCollection(ArrayList::new));
       return result;
+  }
+
+  // gets all of the course names in system for a given term
+  public static HashSet<String> getCourseNamesInTerm(final Pair<Term, Year> term) {
+    ArrayList<CourseOffering> offerings = DatabaseInterface.getCourseOfferingsInTerm(term);
+    if(offerings == null) {
+      return new HashSet<>();
+    }
+    return offerings
+            .stream()
+            .map(offering -> offering.courseName)
+            .collect(Collectors.toCollection(HashSet::new));
   }
 
   // ============== CourseOfferings ===========

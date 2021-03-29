@@ -1,5 +1,6 @@
 package com.ron_phenomenon.unbuddy;
 
+import com.ron_phenomenon.unbuddy.desktop_ui.Login;
 import com.ron_phenomenon.unbuddy.model.AcademicProgram;
 import com.ron_phenomenon.unbuddy.model.Term;
 import com.ron_phenomenon.unbuddy.model.courses.Course;
@@ -11,8 +12,10 @@ import com.ron_phenomenon.unbuddy.model.users.UserType;
 import com.ron_phenomenon.unbuddy.ron_engine.dynamo.DatabaseInterface;
 import com.ron_phenomenon.unbuddy.ron_engine.dynamo.data_loader.DataLoader;
 import com.ron_phenomenon.util.Pair;
+
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
+import java.awt.*;
 import java.time.Instant;
 import java.time.Year;
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) {
         DatabaseInterface.connect();
+
 
 
         // Data Loader Mode
