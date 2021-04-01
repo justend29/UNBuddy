@@ -1,4 +1,4 @@
-package LoginPage;
+package com.ron_phenomenon.unbuddy.desktop_ui;
 
 public class Course {
 

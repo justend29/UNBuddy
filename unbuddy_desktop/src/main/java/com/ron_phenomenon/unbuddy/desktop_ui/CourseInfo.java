@@ -1,5 +1,6 @@
-package LoginPage;
-import java.awt.BorderLayout;
+package com.ron_phenomenon.unbuddy.desktop_ui;
+
+
 import java.awt.EventQueue;
 
 import javax.swing.DefaultCellEditor;
@@ -10,8 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
-import org.eclipse.swt.widgets.TableColumn;
 
 import javax.swing.JLabel;
 import java.awt.Font;

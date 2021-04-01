@@ -1,4 +1,4 @@
-package LoginPage;
+package com.ron_phenomenon.unbuddy.desktop_ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
