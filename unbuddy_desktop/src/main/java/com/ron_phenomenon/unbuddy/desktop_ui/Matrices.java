@@ -47,7 +47,9 @@ public class Matrices extends JFrame {
 	private final JScrollPane scrollPane = new JScrollPane();
 	JPanel [] programs = new JPanel[50];
 	private ArrayList<String> courses = new ArrayList<String>();
-	private JTable table_1;
+	private static JTable table_1;
+	private static JPanel panel = new JPanel();
+	private static int index = 0;
 
 
 	/**
@@ -78,7 +80,7 @@ public class Matrices extends JFrame {
 		contentPane.setLayout(null);
 		DefaultTableModel tableModel;
 		
-		JPanel panel = new JPanel();
+		
 		panel.setBounds(168, 31, 572, 182);
 		contentPane.add(panel);
 		
@@ -90,9 +92,6 @@ public class Matrices extends JFrame {
 		panel.setLayout(null);
 		
 		Object[][] data = {
-			    {""},
-
-		
 			};
 		
 		String[] columnNames = {"Term 1"};
@@ -115,7 +114,7 @@ public class Matrices extends JFrame {
 				course.setVisible(true);
 			}
 		});
-		btnNewButton_1.setBounds(96, 135, 168, 23);
+		btnNewButton_1.setBounds(96, 134, 168, 23);
 		panel.add(btnNewButton_1);
 		
 		
@@ -124,6 +123,7 @@ public class Matrices extends JFrame {
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				index = 0;
 				model.addColumn("Term " + columnNumber++);
 				
 			}
@@ -138,6 +138,19 @@ public class Matrices extends JFrame {
 		        e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
 		    }
 		});;
+		
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+				Login.main(new String[0]);
+				
+			}
+		});
+		btnLogout.setBounds(37, 60, 109, 148);
+		contentPane.add(btnLogout);
 		
 		JButton btnNewButton_1_1 = new JButton("Disenroll From Program");
 		btnNewButton_1_1.setBounds(195, 159, 177, 23);
@@ -203,6 +216,27 @@ public class Matrices extends JFrame {
 	
 	}
 	
+	public static void addRow(Object course) {
+		
+		DefaultTableModel model = (DefaultTableModel) table_1.getModel();
+		index = model.getRowCount() - 1;
+		model.addRow(new Object[]{course});
+		
+	}
+	
+	public static void deleteRow(Object course) {
+		
+		DefaultTableModel model = (DefaultTableModel) table_1.getModel();
+
+		if (table_1.getRowCount() > 0) {
+            for (int i = table_1.getRowCount() - 1; i > -1; i--) {
+            	
+                model.removeRow(i);
+            }
+        }
+		
+	}
+	
 }
 
 class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -265,18 +299,7 @@ class ButtonEditor extends DefaultCellEditor
   }
 
   //IF BUTTON CELL VALUE CHNAGES,IF CLICKED THAT IS
-   @Override
-  public Object getCellEditorValue() {
 
-     if(clicked)
-      {
-      //SHOW US SOME MESSAGE
-        JOptionPane.showMessageDialog(btn, lbl+" Clicked");
-      }
-    //SET IT TO FALSE NOW THAT ITS CLICKED
-    clicked=false;
-    return new String(lbl);
-  }
 
    @Override
   public boolean stopCellEditing() {
