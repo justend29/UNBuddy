@@ -137,7 +137,6 @@ public class CreateAccount extends JFrame {
 				
 				dispose();
 				Login.main(new String[0]);
-				
 			}
 		});
 		btnReturn.setBounds(172, 347, 147, 32);

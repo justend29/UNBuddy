@@ -24,6 +24,17 @@ public class App {
     public static void main(String[] args) {
        // DatabaseInterface.connect();
 
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Login window = new Login();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
 
         // Data Loader Mode

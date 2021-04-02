@@ -18,25 +18,9 @@ import java.lang.*;
 
 public class Login {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField txtEmailAddress;
 	private JTextField txtPassword;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
