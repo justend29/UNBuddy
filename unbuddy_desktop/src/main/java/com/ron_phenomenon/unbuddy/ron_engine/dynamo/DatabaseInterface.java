@@ -34,8 +34,8 @@ import com.ron_phenomenon.unbuddy.ron_engine.dynamo.mappings.UserItem;
 public class DatabaseInterface {
   private static DynamoDbEnhancedClient client;
 
-  private static final String accessKey = "AKIAR3FNVHQCJOWKMYKM";
-  private static final String secretAccessKey = "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";
+  private static final String accessKey = "";
+  private static final String secretAccessKey = "";
 
   // Database Cache
   private static HashMap<String, User> cachedUsers = new HashMap<>(); // email -> User
